@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour,IDamagable
 {
-    public float moveSpeed = 15;
-    public float jumpForce = 25;
+    public float moveSpeed;
+    public float jumpForce;
     public Camera playerCamera;
     private Rigidbody rigidBody;
     private Vector3 moveDirection = Vector3.zero;
@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour,IDamagable
     [SerializeField] private float gravity = 3;
     private float offset = 1;
     public static PlayerMovement Instance;
+    private bool isGrounded = false;
 
     void Awake(){
         Instance = this;
@@ -25,8 +26,9 @@ public class PlayerMovement : MonoBehaviour,IDamagable
         float vertMove = Input.GetAxisRaw("Vertical");
         moveDirection = (transform.forward * vertMove + transform.right * horzMove).normalized;
         
-        if(Input.GetKeyDown(KeyCode.Space) && IsGrounded()){
+        if(Input.GetKeyDown(KeyCode.Space) && isGrounded){
             rigidBody.AddForce(transform.up * jumpForce,ForceMode.Impulse);
+            isGrounded = false;
         }
     }
 
@@ -35,12 +37,14 @@ public class PlayerMovement : MonoBehaviour,IDamagable
         rigidBody.linearVelocity = new Vector3(rigidBody.linearVelocity.x*(100-friction)/100,rigidBody.linearVelocity.y-gravity/10,rigidBody.linearVelocity.z*(100-friction)/100);
     }
 
-    private bool IsGrounded(){
-        return Physics.Raycast(transform.position,Vector3.down,offset + .15f);
-    }
-
     public void TakeDamage(int damage)
     {
         Debug.Log("Implement this");
+    }
+
+    public void OnCollisionEnter(Collision collision) {
+        if (collision.gameObject.tag == "Platform") {
+            isGrounded = true;
+        }
     }
 }
