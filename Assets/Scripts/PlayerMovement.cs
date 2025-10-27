@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour,IDamagable
     private Vector3 moveDirection = Vector3.zero;
     [SerializeField] private float friction = 10;
     [SerializeField] private float gravity = 3;
-    private float offset = 1;
     public static PlayerMovement Instance;
     private bool isGrounded = false;
 
