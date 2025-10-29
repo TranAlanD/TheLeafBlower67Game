@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour,IDamagable
         float vertMove = Input.GetAxisRaw("Vertical");
         moveDirection = (transform.forward * vertMove + transform.right * horzMove).normalized;
         
-        if(Input.GetKeyDown(KeyCode.Space) && isGrounded){
+        if(Input.GetKey(KeyCode.Space) && isGrounded){
             rigidBody.AddForce(transform.up * jumpForce,ForceMode.Impulse);
             isGrounded = false;
         }
