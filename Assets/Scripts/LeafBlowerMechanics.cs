@@ -22,7 +22,7 @@ public class LeafBlowerMechanics : MonoBehaviour
 
     void Blow() {
         //Ray ray = new Ray(transform.position + 100f * transform.forward, transform.forward);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * 2f, blowRadius, transform.forward, blowRange);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * 2f + transform.right * 0.75f, blowRadius, transform.forward, blowRange);
 
         //Debug.DrawRay(transform.position, transform.forward * blowRange, Color.red, 0.5f);
 
@@ -36,7 +36,7 @@ public class LeafBlowerMechanics : MonoBehaviour
                 if (rb != null)
                 {
                     // Calculate direction and apply force
-                    Vector3 forceDir = hit.collider.transform.position - transform.position;
+                    Vector3 forceDir = hit.collider.transform.position - transform.position - transform.right * 0.75f;
                     rb.AddForce(forceDir.normalized * blowForce, ForceMode.Impulse);
                 }
             }
