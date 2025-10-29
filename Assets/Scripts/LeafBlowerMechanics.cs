@@ -13,7 +13,7 @@ public class LeafBlowerMechanics : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(Input.GetMouseButton(0)){
             Blow();
@@ -21,8 +21,8 @@ public class LeafBlowerMechanics : MonoBehaviour
     }
 
     void Blow() {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, blowRadius, transform.forward, blowRange);
+        //Ray ray = new Ray(transform.position + 100f * transform.forward, transform.forward);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward * 2f, blowRadius, transform.forward, blowRange);
 
         //Debug.DrawRay(transform.position, transform.forward * blowRange, Color.red, 0.5f);
 
