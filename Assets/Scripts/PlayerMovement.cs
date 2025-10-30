@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour,IDamagable
     [SerializeField] private float friction = 10;
     [SerializeField] private float gravity = 3;
     public static PlayerMovement Instance;
+    public float externalSpeedMultiplier = 1f;
     private bool isGrounded = false;
     private bool sprintMode = true;
 
